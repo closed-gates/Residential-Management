@@ -89,3 +89,11 @@ CREATE TABLE flat_plot_rent_selling (
 
 ALTER TABLE Payment
 MODIFY pin BIGINT NOT NULL;
+
+
+ALTER TABLE Payment
+ADD CONSTRAINT 
+FOREIGN KEY (pin)
+REFERENCES flat_plot_rent_selling(pin)
+ON DELETE CASCADE
+ON UPDATE CASCADE;

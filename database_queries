@@ -1,0 +1,91 @@
+CREATE TABLE user_info (
+    nid BIGINT PRIMARY KEY,
+    `name` VARCHAR(100) NOT NULL,
+    dob DATE NOT NULL,
+    street VARCHAR(150) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    district VARCHAR(50) NOT NULL,
+    membership VARCHAR(30),
+    membership_refer BIGINT
+);
+
+ALTER TABLE user_info
+ADD CONSTRAINT fk_membership_refer
+FOREIGN KEY (membership_refer)
+REFERENCES user_info(nid)
+ON DELETE SET NULL
+ON UPDATE CASCADE;
+
+
+CREATE TABLE phone_number (
+    id INT PRIMARY KEY AUTO_INCREMENT,  
+    nid BIGINT NOT NULL,
+    phone_number VARCHAR(15) NOT NULL UNIQUE,
+
+    CONSTRAINT
+        FOREIGN KEY (nid)
+        REFERENCES user_info(nid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+
+CREATE TABLE Landlord (
+    nid BIGINT NOT NULL,
+    is_verified BOOLEAN DEFAULT FALSE,
+    total_properties INT DEFAULT 0,
+    
+    PRIMARY KEY (nid),
+    CONSTRAINT 
+        FOREIGN KEY (nid)
+        REFERENCES user_info(nid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+
+CREATE TABLE Admin (
+    nid BIGINT NOT NULL,
+    `role` VARCHAR(50) NOT NULL,
+    department VARCHAR(100),
+    username VARCHAR(50) NOT NULL UNIQUE,
+    work_email VARCHAR(100) NOT NULL UNIQUE,
+
+    PRIMARY KEY (nid),
+    CONSTRAINT 
+        FOREIGN KEY (nid)
+        REFERENCES user_info(nid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+
+
+
+CREATE TABLE Payment (
+    transaction_id VARCHAR(50) NOT NULL,  
+    nid BIGINT NOT NULL,
+    pin VARCHAR(10) NOT NULL UNIQUE,
+    business_phn_no VARCHAR(50) NOT NULL UNIQUE,
+    invoice VARCHAR(50) NOT NULL UNIQUE,
+    receipt VARCHAR(100),
+
+    PRIMARY KEY (transaction_id),
+    CONSTRAINT 
+        FOREIGN KEY (nid)
+        REFERENCES user_info(nid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE flat_plot_rent_selling (
+    pin BIGINT NOT NULL PRIMARY KEY,
+    utilities VARCHAR(100),
+    is_furnished BOOLEAN DEFAULT FALSE,
+    price_rent DECIMAL(12,2) NOT NULL,
+    renting_type ENUM('Rent', 'Sale', 'Sub-let') NOT NULL
+);
+
+
+ALTER TABLE Payment
+MODIFY pin BIGINT NOT NULL;

@@ -9,6 +9,15 @@ if(isset($_POST['fname']) && isset($_POST["nid"])){
 
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) !=0){
+        $stmt = $conn->prepare("insert into user_info ('nid','name') values('$u','$n')");
+        $stmt->bind_param("si",$u,$n);
+        if ($stmt->execute()){
+            echo"Updated succesfullly";
+
+        }
+        else{
+            echo"error updating".$stmt->error;
+        }
         echo "Welcome";
 
     }

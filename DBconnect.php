@@ -14,7 +14,6 @@ if ($conn->connect_error){
     }
 else{
     mysqli_select_db($conn,$dbname);
-    echo "Connection Successful";
     }
 
 

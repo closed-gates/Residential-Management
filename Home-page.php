@@ -35,16 +35,21 @@
                     <p class="stat-number">124</p>
                 </div>
                 <div class="card">
-                    <h3>Pending Requests</h3>
-                    <p class="stat-number" style="color: #e67e22;">12</p>
-                </div>
-                <div class="card">
-                    <h3>Monthly Revenue</h3>
-                    <p class="stat-number">$42,500</p>
+                    <h3>Availabe Property</h3>
+                    <p class="stat-number" style="color: #e67e22;">
+                        <?php
+                        require_once('DBconnect.php');
+                        $sql = "select count(*) as t_count from flat_plot_rent_selling";
+                        $result = mysqli_query($conn,$sql);
+                        if ($result){
+                            $row = mysqli_fetch_assoc($result);
+                            echo $row['t_count'];}
+                        ?>
+                    </p>
                 </div>
             </div>
             <section class="table-section">
-                <h2>List of Flats</h2>
+                <h2>List of Property</h2>
                 <table id="requestTable">
                     <thead>
                         <tr>

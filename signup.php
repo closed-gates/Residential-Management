@@ -2,7 +2,7 @@
 
 require_once('DBconnect.php');
 
-if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && isset($_POST['street']) && isset($_POST['city']) && isset($_POST['district'])){
+if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && isset($_POST['street']) && isset($_POST['city']) && isset($_POST['district']) && isset($_POST['user'])){
     $u = $_POST['uname'];
     $n = $_POST["nid"];
     $dob = $_POST["dob"];
@@ -10,6 +10,7 @@ if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && iss
     $c = $_POST["city"];
     $d = $_POST["district"];
     $m = $_POST["mem"];
+    $us = $_POST['user'];
     $sql = "select * from user_info where nid = '$n'";
 
     $result = mysqli_query($conn,$sql);

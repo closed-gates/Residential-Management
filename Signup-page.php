@@ -20,6 +20,12 @@
                     City: <input type="text" name="city"> </br>
                     District: <input type="text" name="district"> </br>
                     Membership-referal(NID): <input type="number" name="mem"> </br></br>
+                    <label for="user">What type of user are you:</label>
+                    <select name="user" id="user">
+                        <option value="Admin">Admin</option>
+                        <option value="Landlord">Landlord</option>
+                        <option value="Renter">Renter</option>
+                    </select><br><br><br>
                     <input type="submit" value="sign up">
             </form>
     </main>

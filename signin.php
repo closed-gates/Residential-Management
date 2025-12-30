@@ -10,7 +10,7 @@ if(isset($_POST["nid"]) && isset($_POST['fname'])){
 
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) !=0){
-        header("Location: Home-page.html");
+        header("Location: Home-page.php");
 
     }
     else{

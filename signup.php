@@ -17,7 +17,7 @@ if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && iss
     if(mysqli_num_rows($result) !=0){
         echo "User already exists";
         sleep(2);
-        header("Location: Signup-page.html");
+        header("Location: Signup-page.php");
 
     }   
     else{
@@ -29,7 +29,7 @@ if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && iss
             $sql = "insert into user_info values('$n','$u','$dob','$s','$c','$d','NO','NULL')";
             mysqli_query($conn,$sql);
         }
-        header("Location: Home-page.html");
+        header("Location: Home-page.php");
     }
 }
 

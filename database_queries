@@ -97,3 +97,173 @@ FOREIGN KEY (pin)
 REFERENCES flat_plot_rent_selling(pin)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
+
+
+CREATE TABLE renters (
+    nid BIGINT NOT NULL,
+    occupation VARCHAR(100),
+    is_student TINYINT(1),
+    current_rent_status VARCHAR(50),
+    rental_history_count INT DEFAULT 0,
+    PRIMARY KEY (nid),
+    FOREIGN KEY (nid)
+        REFERENCES user_info(nid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+
+CREATE TABLE complaint_suggestion (
+    token_id BIGINT NOT NULL,
+    suggestion TEXT,
+    complain TEXT,
+    feedback TEXT,
+    PRIMARY KEY (token_id),
+    UNIQUE (token_id)
+);
+
+CREATE TABLE review (
+    nid BIGINT NOT NULL,
+    token_id BIGINT NOT NULL,
+
+    PRIMARY KEY (nid, token_id),
+
+    UNIQUE (nid),
+    UNIQUE (token_id),
+
+    FOREIGN KEY (nid)
+        REFERENCES user_info(nid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    FOREIGN KEY (token_id)
+        REFERENCES complaint_suggestion(token_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+
+CREATE TABLE online_payment (
+    transaction_id VARCHAR(50) NOT NULL,
+    discount_voucher DECIMAL(10,2) DEFAULT 0,
+    tax DECIMAL(10,2) DEFAULT 0,
+    PRIMARY KEY (transaction_id)
+);
+
+CREATE TABLE services (
+    business_no VARCHAR(50) NOT NULL,
+    datetime DATETIME NOT NULL,
+    packages VARCHAR(100),
+    service_price DECIMAL(10,2),
+    service_name VARCHAR(100),
+    contact_info VARCHAR(100),
+    PRIMARY KEY (business_no)
+);
+
+
+CREATE TABLE service_type (
+    business_no VARCHAR(50) NOT NULL,
+    service_type VARCHAR(100) NOT NULL,
+
+    PRIMARY KEY (business_no),
+
+    UNIQUE (service_type),
+
+    FOREIGN KEY (business_no)
+        REFERENCES services(business_no)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+
+CREATE TABLE online_groceries (
+    invoice_no VARCHAR(50) NOT NULL,
+    deals VARCHAR(100),
+    time DATETIME,
+    contact_info VARCHAR(100),
+    inventory_list TEXT,
+    PRIMARY KEY (invoice_no)
+);
+
+
+ALTER TABLE payment
+ADD CONSTRAINT 
+FOREIGN KEY (transaction_id)
+REFERENCES online_payment(transaction_id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+ALTER TABLE payment
+ADD CONSTRAINT 
+FOREIGN KEY (business_phn_no)
+REFERENCES services(business_no)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+ALTER TABLE payment
+ADD CONSTRAINT 
+FOREIGN KEY (invoice)
+REFERENCES online_groceries(invoice_no)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+
+CREATE TABLE inventory_tracking (
+    serial_no VARCHAR(50) NOT NULL,
+    appliance_type VARCHAR(100) NOT NULL,
+    repair VARCHAR(100),
+    warranty VARCHAR(50),
+    purchase_date DATE,
+
+    PRIMARY KEY (serial_no),
+    UNIQUE (appliance_type)
+);
+
+
+ALTER TABLE inventory_tracking
+ADD UNIQUE KEY uq_serial_appliance (serial_no, appliance_type);
+
+
+CREATE TABLE can_access (
+    nid BIGINT NOT NULL,
+    serial_no VARCHAR(50) NOT NULL,
+    appliance_type VARCHAR(100) NOT NULL,
+
+    PRIMARY KEY (nid, serial_no, appliance_type),
+
+    FOREIGN KEY (nid)
+        REFERENCES user_info(nid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    FOREIGN KEY (serial_no, appliance_type)
+        REFERENCES inventory_tracking(serial_no, appliance_type)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+ALTER TABLE flat_plot_rent_selling
+ADD COLUMN is_occupied TINYINT DEFAULT 0;
+
+ALTER TABLE flat_plot_rent_selling
+MODIFY COLUMN is_occupied BOOLEAN DEFAULT FALSE;
+
+ALTER TABLE flat_plot_rent_selling
+DROP COLUMN is_occupied;
+
+
+CREATE TABLE can_occupy (
+    nid BIGINT NOT NULL,
+    pin BIGINT NOT NULL,
+    no_of_occupants INT DEFAULT 1,
+
+    PRIMARY KEY (nid, pin),
+
+    FOREIGN KEY (nid)
+        REFERENCES renters(nid)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    FOREIGN KEY (pin)
+        REFERENCES flat_plot_rent_selling(pin)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+) ;

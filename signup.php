@@ -21,12 +21,12 @@ if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && iss
 
     }   
     else{
-        if ($m != 0){
+        if ($m != NULL){
             $sql = "insert into user_info values('$n','$u','$dob','$s','$c','$d','Yes','$m')";
             mysqli_query($conn,$sql);
         }
         else{
-            $sql = "insert into user_info values('$n','$u','$dob','$s','$c','$d','NO','NULL')";
+            $sql = "insert into user_info(nid,name,dob,street,city,district,membership) values('$n','$u','$dob','$s','$c','$d','NO')";
             mysqli_query($conn,$sql);
         }
         header("Location: Home-page.php");

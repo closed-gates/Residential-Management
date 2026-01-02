@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
     inputMap[this.value].forEach((label, index) => {
         if (this.value == "admin"){
             const input = document.createElement("input");
+            const l = document.createElement("label");
+            l.textContent = `${label}: `;
+            container.appendChild(l);
             input.type = "text";
             input.placeholder = label;
             input.name = `${this.value}_${label}`;
@@ -68,9 +71,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 container.appendChild(document.createElement("br"));
                 container.appendChild(document.createElement("br"));
             }
+            else if(label == "Rental_History"){
+                input.type = "number";
+                const l = document.createElement("label");
+                l.textContent = `${label}: `;
+                container.appendChild(l);
+                input.placeholder = `How many times you rented`;
+                input.name = `${this.value}_${label}`;
+                input.required = true;
+                input.style = `width: 180px`;
+                container.appendChild(input);
+                container.appendChild(document.createElement("br"));container.appendChild(document.createElement("br"));
+            }
             else{
                 input.type = "text";
                 input.placeholder = label;
+                const l = document.createElement("label");
+                l.textContent = `${label}: `;
+                container.appendChild(l);
                 input.name = `${this.value}_${label}`;
                 input.required = true;
                 container.appendChild(input);

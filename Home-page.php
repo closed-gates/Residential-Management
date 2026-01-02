@@ -12,12 +12,9 @@
         <nav class="sidebar">
             <div class="logo"><a href = "Home-page.php">ResiCare</a></div>
             <ul>
-                <?php
-
-                ?>
                 <li class="active"><a href="#">Dashboard</a></li>
-                <li><a href="#">Residents</a></li>
-                <li><a href="#">Maintenance</a></li>
+                <li><a href="Residents-page.html">Residents</a></li>
+                <li><a href="Service-page.html">Maintenance</a></li>
                 <li><a href="#">Payments</a></li>
                 <li><a href="#">Settings</a></li>
             </ul>

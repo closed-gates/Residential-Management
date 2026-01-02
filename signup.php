@@ -2,7 +2,8 @@
 <?php
 
 require_once('DBconnect.php');
-
+session_start();   
+session_regenerate_id(true); 
 if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && isset($_POST['street']) && isset($_POST['city']) && isset($_POST['district']) && isset($_POST['userselect'])){
     $u = $_POST['uname'];
     $n = $_POST["nid"];
@@ -13,6 +14,9 @@ if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && iss
     $m = $_POST["mem"];
     $allowedTypes = ['admin', 'landlord', 'renter'];
     $us = $_POST['userselect'] ?? '';
+    $_SESSION['user_id']   = $n;     
+    $_SESSION['username']  = $u;
+    $_SESSION['user_type'] = $us; 
     if (!in_array($us, $allowedTypes, true)) {
         die("Invalid user type selected");
     }

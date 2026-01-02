@@ -1,8 +1,9 @@
+
 <?php
 
 require_once('DBconnect.php');
 
-if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && isset($_POST['street']) && isset($_POST['city']) && isset($_POST['district']) && isset($_POST['user'])){
+if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && isset($_POST['street']) && isset($_POST['city']) && isset($_POST['district']) && isset($_POST['userselect'])){
     $u = $_POST['uname'];
     $n = $_POST["nid"];
     $dob = $_POST["dob"];
@@ -10,14 +11,17 @@ if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && iss
     $c = $_POST["city"];
     $d = $_POST["district"];
     $m = $_POST["mem"];
-    $us = $_POST['user'];
+    $allowedTypes = ['admin', 'landlord', 'renter'];
+    $us = $_POST['userselect'] ?? '';
+    if (!in_array($us, $allowedTypes, true)) {
+        die("Invalid user type selected");
+    }
     $sql = "select * from user_info where nid = '$n'";
 
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) !=0){
-        echo "User already exists";
-        sleep(2);
-        header("Location: Signup-page.php");
+        header("Location: Signup-page.html?error=exists");
+        exit();
 
     }   
     else{
@@ -27,6 +31,32 @@ if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && iss
         }
         else{
             $sql = "insert into user_info(nid,name,dob,street,city,district,membership) values('$n','$u','$dob','$s','$c','$d','NO')";
+            mysqli_query($conn,$sql);
+        }
+        if ($us == 'admin'){
+            $r = $_POST['admin_Role'];
+            $dept = $_POST['admin_Department'];
+            $e = $_POST['admin_Email'];
+            $sql = "insert into admin values('$n','$r','$dept','$u','$e')";
+            mysqli_query($conn,$sql);
+        }
+        else if ($us == 'landlord'){
+            $l = isset($_POST['landlord_is_verified']) ? 1 : 0;
+            if ($l){
+                $l = 1;
+            }
+            else{
+                $l = 0;
+            }
+            $sql = "insert into landlord values('$n','$l','0')";
+            mysqli_query($conn,$sql);
+        }
+        else{
+            $o = $_POST['renter_Occupation'];
+            $is = isset($_POST['renter_is_student']) ? 1 : 0;
+            $crs = $_POST['renter_current_rent status'];
+            $rhc = isset($_POST['renter_Rental_History']) ? 1 : 0;
+            $sql = "insert into renters values('$n','$o','$is','$crs','$rhc')";
             mysqli_query($conn,$sql);
         }
         header("Location: Home-page.php");

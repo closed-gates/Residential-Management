@@ -32,7 +32,14 @@
             <div class="stats-grid">
                 <div class="card">
                     <h3>Total Residents</h3>
-                    <p class="stat-number">124</p>
+                    <p class="stat-number">
+                        <?php 
+                            require_once('DBconnect.php');
+                            $sql = "select count(*) as total_renters from renters";
+                            $result = mysqli_query($conn,$sql);
+                            $row = mysqli_fetch_array($result);
+                            echo $row[0];
+                        ?></p>
                 </div>
                 <div class="card">
                     <h3>Availabe Property</h3>
@@ -78,7 +85,7 @@
                             }
                             ?></td>
                             <td><?php echo $row[1];?></td>
-                            <td><button><?php if ($row[4] == "Rent"){
+                            <td><a href = "Buy-page.php"><button><?php if ($row[4] == "Rent"){
                                 echo "Rent";
                             }
                             else if($row[4] == "Sale") {
@@ -87,7 +94,7 @@
                             else{
                                 echo "Sub-let";
                             }
-                            ?></button></td>
+                            ?></button></a></td>
                         </tr>
                         <?php }
                             }
@@ -97,6 +104,5 @@
             </section>
         </main>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>

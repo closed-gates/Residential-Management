@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResiCare | Sign-up</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="main-content">
+            <header>
+                <h1>Sign-up</h1>
+            </header>
+            <form action ="signup.php" class="form_design" method="POST"> 
+                    Nid: <input type="number" name="nid" placeholder="NID" required> </br>
+                    Username: <input type="text" name="uname" placeholder="Username" required> </br>
+                    Date-of_birth: <input type="date" name="dob"> </br>
+                    Street: <input type="text" name="street" placeholder="Street"> </br>
+                    City: <input type="text" name="city" placeholder="City"> </br>
+                    District: <input type="text" name="district" placeholder="District"> </br>
+                    Membership-referal(NID): <input type="number" name="mem" placeholder="123456789"> </br></br>
+                    <label for="userselect">Select Type:</label>
+                    <select id="userselect" name="userselect">
+                        <option value="">-- Select --</option>
+                        <option value="admin">Admin</option>
+                        <option value="landlord">Landlord</option>
+                        <option value="renter">Renter</option>
+                    </select>
+                    <br><br>
+                    <div id="inputcontainer"></div>
+                    <br><br><br>
+                    
+                    <input type="submit" value="sign up">
+            </form>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

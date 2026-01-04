@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    <?php
-    require_once("auth.php");
+    <?php 
+     require_once('auth.php')
     ?>
 <head>
     <meta charset="UTF-8">
@@ -22,11 +22,8 @@
                 <li><a href="review-page.php">Review</a></li>
             </ul>
         </nav>
+    <main>
 
-        <main class="main-content">
-            
-        </main>
-    </div>
-    <script src="script.js"></script>
+    </main>
 </body>
 </html>

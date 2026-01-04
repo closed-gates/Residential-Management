@@ -2,7 +2,7 @@
 <?php
 
 require_once('DBconnect.php');
-require_once('session.php')   
+require_once('session.php');   
 session_regenerate_id(true); 
 if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && isset($_POST['street']) && isset($_POST['city']) && isset($_POST['district']) && isset($_POST['userselect'])){
     $u = $_POST['uname'];

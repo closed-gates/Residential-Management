@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <?php 
-     require_once('auth.php')
+     require_once('auth.php');
     ?>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResiCare | Management Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-</head>
+<?php include 'head.php'; ?>
 <body>
     <div class="container">
         <?php include 'head-nav.php'; ?>
@@ -18,7 +12,7 @@
             <header>
                 <h1>Property Overview</h1>
                 <form action="logout.php" class="form_design" method="POST">
-                    <button type="submit">Logout</button>
+                    <button type="submit" class="btn-primary">Logout</button>
                 </form>
             </header>
 
@@ -55,7 +49,7 @@
                     echo '
                     <div style="display:flex; justify-content:flex-end;">
                         <form action="add-property.php" class="form_design" method="POST">
-                            <button type="submit">+Add property</button>
+                            <button type="submit" class="btn-primary">+Add property</button>
                         </form>
                     </div>
                     ';
@@ -110,15 +104,18 @@
                             elseif ($propertyType === 'Rent') $label = 'Rent';
                             elseif ($propertyType === 'Sub-let') $label = 'Sub-let';
                             if ($allowed) {
-                                echo '<a href="Buy-page.php">
-                                        <button>' . $label . '</button>
-                                    </a>';
+                                echo '<form action="Buy-page.php" method="POST">
+                                    <input type="hidden" name="PIN" value="'.$row[0].'">
+                                    <input type="hidden" name="nid" value="'.$_SESSION['user_id'].'">
+                                    <button class="btn-primary">' . $label . '</button>
+                                </form>';
                             } else {
-                                echo '<button disabled style="opacity:0.5; cursor:not-allowed;">
+                                echo '<button class="btn-primary" disabled style="opacity:0.5; cursor:not-allowed;">
                                         Not Allowed
                                     </button>';
                             }
                             ?>
+                            
                             </td>
                         </tr>
                         <?php }

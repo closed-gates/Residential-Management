@@ -9,13 +9,7 @@
 
     $_SESSION['business_no'] = $_POST['business_no'];
 ?>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResiCare | Management Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-</head>
+<?php include 'head.php'; ?>
 <body>
     <div class="container">
         <?php include 'head-nav.php'; ?>
@@ -43,7 +37,7 @@
                 </select><br><br>
                 <form action="payment-page.php" method="POST">
                     <input type="hidden" name="business_no" value="<?= $row[0]; ?>">
-                    <button type="submit">Hire</button>
+                    <button type="submit" class="btn-primary">Hire</button>
                 </form>
             </section>
         </main>

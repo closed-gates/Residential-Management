@@ -2,8 +2,7 @@
 <?php
 
 require_once('DBconnect.php');
-require_once('session.php');   
-session_regenerate_id(true); 
+require_once('session.php');    
 if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && isset($_POST['street']) && isset($_POST['city']) && isset($_POST['district']) && isset($_POST['userselect'])){
     $u = $_POST['uname'];
     $n = $_POST["nid"];
@@ -12,6 +11,7 @@ if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && iss
     $c = $_POST["city"];
     $d = $_POST["district"];
     $m = $_POST["mem"];
+    $p = $_POST["phn"];
     $allowedTypes = ['admin', 'landlord', 'renter'];
     $us = $_POST['userselect'] ?? '';    
     if (!in_array($us, $allowedTypes, true)) {
@@ -37,14 +37,14 @@ if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && iss
         $_SESSION['user_id']   = $n; 
         $_SESSION['username']  = $u;
         if ($us == 'admin'){
-            $r = $_POST['admin_Role'];
+            $r = isset($_POST['admin_Role']);
             $dept = $_POST['admin_Department'];
-            $e = $_POST['admin_Email'];
+            $e = isset($_POST['admin_Email']);
             $sql = "insert into admin values('$n','$r','$dept','$u','$e')";
             mysqli_query($conn,$sql);
         }
         else if ($us == 'landlord'){
-            $l = isset($_POST['landlord_is_verified']) ? 1 : 0;
+            $l = $_POST['landlord_is_verified'] ? 1 : 0;
             if ($l){
                 $l = 1;
             }
@@ -56,13 +56,14 @@ if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && iss
         }
         else{
             $o = $_POST['renter_Occupation'];
-            $is = isset($_POST['renter_is_student']) ? 1 : 0;
-            $crs = $_POST['renter_current_rent status'];
-            $rhc = isset($_POST['renter_Rental_History']) ? 1 : 0;
+            $is = $_POST['renter_is_student']? 1 : 0;
+            $crs = $_POST['renter_current_rent_status']? 1 : 0;
+            $rhc = $_POST['renter_Rental_History'];
             $sql = "insert into renters values('$n','$o','$is','$crs','$rhc')";
             mysqli_query($conn,$sql);
         }
         $_SESSION['user_type'] = $us; 
+        session_regenerate_id(true);
         header("Location: Home-page.php");
 
     }

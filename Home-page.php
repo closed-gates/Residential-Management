@@ -45,7 +45,7 @@
             <section class="table-section">
                 <h2>List of property</h2>
                 <?php
-                if (in_array($_SESSION['user_type'], ['Admin', 'Landlord'])) {
+                if (in_array($_SESSION['user_type'], ['admin', 'landlord'])) {
                     echo '
                     <div style="display:flex; justify-content:flex-end;">
                         <form action="add-property.php" class="form_design" method="POST">
@@ -91,13 +91,13 @@
                             $propertyType = $row[4];
                             $allowed = false;
                             $label = "";
-                            if ($user === 'Admin') {
+                            if ($user === 'admin') {
                                 $allowed = true;
                             }
-                            elseif ($user === 'Landlord' && $propertyType === 'Sale') {
+                            elseif ($user === 'landlord' && $propertyType === 'Sale') {
                                 $allowed = true;
                             }
-                            elseif ($user === 'Renter' && in_array($propertyType, ['Rent', 'Sub-let'])) {
+                            elseif ($user === 'renter' && in_array($propertyType, ['Rent', 'Sub-let'])) {
                                 $allowed = true;
                             }
                             if ($propertyType === 'Sale') $label = 'Buy';

@@ -22,7 +22,7 @@
                         <option value="Sub-Let">Sub-Let</option>
                     </select><br><br>
                     
-                    <input type="submit" value="Add property">
+                    <button type="submit" class="btn-primary">Add property</button>
             </form>
     </main>
     <script src="script.js"></script>

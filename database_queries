@@ -65,9 +65,9 @@ CREATE TABLE Admin (
 CREATE TABLE Payment (
     transaction_id VARCHAR(50) NOT NULL,  
     nid BIGINT NOT NULL,
-    pin VARCHAR(10) NOT NULL UNIQUE,
-    business_phn_no VARCHAR(50) NOT NULL UNIQUE,
-    invoice VARCHAR(50) NOT NULL UNIQUE,
+    pin VARCHAR(10) NOT NULL ,
+    business_phn_no VARCHAR(50) NOT NULL ,
+    invoice VARCHAR(50) NOT NULL ,
     receipt VARCHAR(100),
 
     PRIMARY KEY (transaction_id),
@@ -125,11 +125,9 @@ CREATE TABLE complaint_suggestion (
 CREATE TABLE review (
     nid BIGINT NOT NULL,
     token_id BIGINT NOT NULL,
+    review_id BIGINT NOT NULL PRIMARY Key,
 
-    PRIMARY KEY (nid, token_id),
-
-    UNIQUE (nid),
-    UNIQUE (token_id),
+    UNIQUE(review_id),
 
     FOREIGN KEY (nid)
         REFERENCES user_info(nid)

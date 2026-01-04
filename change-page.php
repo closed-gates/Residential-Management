@@ -4,23 +4,21 @@
      require_once('auth.php')
     ?>
 <?php include 'head.php'; ?>
+
 <body>
+    <?php include 'head-nav.php'?>
     <main class="main-content">
             <header>
-                <h1>Adding property</h1>
+                <h1>Change</h1>
             </header>
-            <form action ="property.php" class="form_design" method="POST"> 
-                    PIN: <input type="number" name="pin" placeholder="PIN" required> </br>
-                    Utilities: <input type="text" name="util" placeholder="Wi-fi,Fridge etc..."></br>
-                    Is furnished: <input type="checkbox" name="is_furnished"> </br>
-                    Price/Rent: <input type="number" name="price" placeholder="0000"> </br></br>
-                    <label for="flat_type">Select Renting Type:</label>
-                    <select id="flat_type" name="flat_type" required>
-                        <option value="">-- Select --</option>
-                        <option value="Sale">Sale</option>
-                        <option value="Rent">Rent</option>
-                        <option value="Sub-Let">Sub-Let</option>
-                    </select><br><br>
+            <form action ="change.php" class="form_design" method="POST"> 
+                    NID: <input type="number" name="pin" placeholder="nid" required> </br>
+                    Name: <input type="text" name="uname" required></br>
+                    Date of Birth: <input type="text" name="dob"> </br>
+                    Street: <input type="text" name="street" > </br>
+                    City: <input type="text" name="city" > </br></br>
+                    District: <input type="text" name="district" > </br>
+                    Membership Referer: <input type="number" name="mem"> </br></br>
                     
                     <input type="submit" value="Add property">
             </form>

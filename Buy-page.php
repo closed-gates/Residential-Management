@@ -148,6 +148,49 @@ if ($can_proceed && $message === '') {
                     </button>
                 <?php endif; ?>
             </div>
+            <div class="stats-grid">
+                <?php
+                $pin = $_SESSION['pin'];
+
+                $sql = "
+                    SELECT 
+                        u.name,
+                        cs.suggestion,
+                        cs.complain,
+                        cs.feedback
+                    FROM review r
+                    JOIN complaint_suggestion cs 
+                        ON r.token_id = cs.token_id
+                    JOIN user_info u
+                        ON r.nid = u.nid
+                    WHERE r.pin = ?
+                ";
+
+                $stmt = mysqli_prepare($conn, $sql);
+                mysqli_stmt_bind_param($stmt, "i", $pin);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+
+                if (mysqli_num_rows($result) == 0) {
+                    echo "<p>No reviews available for this flat.</p>";
+                } else {
+                    while ($review = mysqli_fetch_assoc($result)) {
+                        echo '
+                            <div class="card">
+                                <h4>Reviewed by: ' . htmlspecialchars($review['name']) . '</h4>
+                                <p><strong>Suggestion:</strong> ' . htmlspecialchars($review['suggestion']) . '</p>
+                                <p><strong>Complaint:</strong> ' . htmlspecialchars($review['complain']) . '</p>
+                                <p><strong>Feedback:</strong> ' . htmlspecialchars($review['feedback']) . '</p>
+                            </div>
+                        ';
+                    }
+                }
+
+                mysqli_stmt_close($stmt);
+                ?>
+            </div>
+
+
 
         </main>
     </div>

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+    <?php 
+     require_once('auth.php')
+    ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +16,9 @@
             <div class="logo"><a href = "Home-page.php">ResiCare</a></div>
             <ul>
                 <li class="active"><a href="#">Dashboard</a></li>
-                <li><a href="Residents-page.html">Residents</a></li>
-                <li><a href="Service-page.html">Maintenance</a></li>
-                <li><a href="#">Payments</a></li>
+                <li><a href="Residents-page.php">Residents</a></li>
+                <li><a href="Service-page.php">Maintenance</a></li>
+                <li><a href="payment-history.php">Payments</a></li>
                 <li><a href="#">Settings</a></li>
             </ul>
         </nav>
@@ -23,7 +26,9 @@
         <main class="main-content">
             <header>
                 <h1>Property Overview</h1>
-                <button id="addResidentBtn" class="btn-primary">+ Add Resident</button>
+                <form action="logout.php" class="form_design" method="POST">
+                    <button type="submit">Logout</button>
+                </form>
             </header>
 
             <div class="stats-grid">
@@ -32,7 +37,7 @@
                     <p class="stat-number">
                         <?php 
                             require_once('DBconnect.php');
-                            $sql = "select count(*) as total_renters from renters";
+                            $sql = "select count(*) as total_renters from renters where current_rent_status = 1";
                             $result = mysqli_query($conn,$sql);
                             $row = mysqli_fetch_array($result);
                             echo $row[0];
@@ -53,7 +58,18 @@
                 </div>
             </div>
             <section class="table-section">
-                <h2>List of Property</h2>
+                <h2>List of property</h2>
+                <?php
+                if (in_array($_SESSION['user_type'], ['Admin', 'Landlord'])) {
+                    echo '
+                    <div style="display:flex; justify-content:flex-end;">
+                        <form action="add-property.php" class="form_design" method="POST">
+                            <button type="submit">+Add property</button>
+                        </form>
+                    </div>
+                    ';
+                }
+                ?>
                 <table id="requestTable">
                     <thead>
                         <tr>
@@ -61,6 +77,7 @@
                             <th>Price/Rent</th>
                             <th>Furnishing</th>
                             <th>Utilities</th>
+                            <th>Available for Sell/Rent/Sublet</th>
                             <th>Buy/Rent</th>
                         </tr>
                         <?php 
@@ -82,16 +99,36 @@
                             }
                             ?></td>
                             <td><?php echo $row[1];?></td>
-                            <td><a href = "Buy-page.php"><button><?php if ($row[4] == "Rent"){
-                                echo "Rent";
+                            <td><?php echo $row[4];?></td>
+                            <td>
+                            <?php
+                            $user = $_SESSION['user_type'];
+                            $propertyType = $row[4];
+                            $allowed = false;
+                            $label = "";
+                            if ($user === 'Admin') {
+                                $allowed = true;
                             }
-                            else if($row[4] == "Sale") {
-                                echo "Buy";
+                            elseif ($user === 'Landlord' && $propertyType === 'Sale') {
+                                $allowed = true;
                             }
-                            else{
-                                echo "Sub-let";
+                            elseif ($user === 'Renter' && in_array($propertyType, ['Rent', 'Sub-let'])) {
+                                $allowed = true;
                             }
-                            ?></button></a></td>
+                            if ($propertyType === 'Sale') $label = 'Buy';
+                            elseif ($propertyType === 'Rent') $label = 'Rent';
+                            elseif ($propertyType === 'Sub-let') $label = 'Sub-let';
+                            if ($allowed) {
+                                echo '<a href="Buy-page.php">
+                                        <button>' . $label . '</button>
+                                    </a>';
+                            } else {
+                                echo '<button disabled style="opacity:0.5; cursor:not-allowed;">
+                                        Not Allowed
+                                    </button>';
+                            }
+                            ?>
+                            </td>
                         </tr>
                         <?php }
                             }

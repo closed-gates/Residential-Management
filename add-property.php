@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+    <?php 
+     require_once('auth.php')
+    ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +16,9 @@
             <div class="logo"><a href = "Home-page.php">ResiCare</a></div>
             <ul>
                 <li class="active"><a href="#">Dashboard</a></li>
-                <li><a href="Residents-page.html">Residents</a></li>
-                <li><a href="Service-page.html">Maintenance</a></li>
-                <li><a href="#">Payments</a></li>
+                <li><a href="Residents-page.php">Residents</a></li>
+                <li><a href="Service-page.php">Maintenance</a></li>
+                <li><a href="payment-history.php">Payments</a></li>
                 <li><a href="#">Settings</a></li>
             </ul>
         </nav>

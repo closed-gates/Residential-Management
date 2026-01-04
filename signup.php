@@ -2,7 +2,7 @@
 <?php
 
 require_once('DBconnect.php');
-session_start();   
+require_once('session.php')   
 session_regenerate_id(true); 
 if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && isset($_POST['street']) && isset($_POST['city']) && isset($_POST['district']) && isset($_POST['userselect'])){
     $u = $_POST['uname'];
@@ -13,10 +13,7 @@ if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && iss
     $d = $_POST["district"];
     $m = $_POST["mem"];
     $allowedTypes = ['admin', 'landlord', 'renter'];
-    $us = $_POST['userselect'] ?? '';
-    $_SESSION['user_id']   = $n;     
-    $_SESSION['username']  = $u;
-    $_SESSION['user_type'] = $us; 
+    $us = $_POST['userselect'] ?? '';    
     if (!in_array($us, $allowedTypes, true)) {
         die("Invalid user type selected");
     }
@@ -37,6 +34,8 @@ if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && iss
             $sql = "insert into user_info(nid,name,dob,street,city,district,membership) values('$n','$u','$dob','$s','$c','$d','NO')";
             mysqli_query($conn,$sql);
         }
+        $_SESSION['user_id']   = $n; 
+        $_SESSION['username']  = $u;
         if ($us == 'admin'){
             $r = $_POST['admin_Role'];
             $dept = $_POST['admin_Department'];
@@ -63,7 +62,9 @@ if(isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && iss
             $sql = "insert into renters values('$n','$o','$is','$crs','$rhc')";
             mysqli_query($conn,$sql);
         }
+        $_SESSION['user_type'] = $us; 
         header("Location: Home-page.php");
+
     }
 }
 

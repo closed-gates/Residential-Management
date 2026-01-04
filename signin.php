@@ -1,7 +1,7 @@
 <?php
 
 require_once('DBconnect.php');
-session_start();
+require_once('session.php');
 
 if(isset($_POST["nid"]) && isset($_POST['fname'])){
     $u = $_POST['fname'];
@@ -17,14 +17,21 @@ if(isset($_POST["nid"]) && isset($_POST['fname'])){
     $resr = mysqli_query($conn,$sqlc);
     if (mysqli_num_rows($resa) != 0){
         $row = mysqli_fetch_assoc($resa);
-        $_SESSION['user_type'] = 'Admin';
-
+        if(in_array($_SESSION['user_id'], $row)){
+            $_SESSION['user_type'] = 'Admin';
+        }
     }
-    else if(mysqli_num_rows($resl) != 0){
-        $_SESSION['user_type'] = 'Landlord';
+    if(mysqli_num_rows($resl) != 0){
+        $row = mysqli_fetch_assoc($resl);
+        if(in_array($_SESSION['user_id'], $row)){
+            $_SESSION['user_type'] = 'Landlord';
+        }
     }
-    else{
-        $_SESSION['user_type'] = 'Renter';
+    if(mysqli_num_rows($resr) != 0){
+        $row = mysqli_fetch_array($resr);
+        if(in_array($_SESSION['user_id'], $row)){
+            $_SESSION['user_type'] = 'Renter';
+        }
     }
     $result = mysqli_query($conn,$sql);
     if(mysqli_num_rows($result) !=0){

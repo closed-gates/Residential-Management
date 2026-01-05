@@ -3,38 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResiCare | Sign-up</title>
-    <link rel="stylesheet" href="Style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <title>ResiCare | Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <main class="main-content">
-            <header>
-                <h1>Sign-up</h1>
-            </header>
-            <form action ="signup.php" class="form_design" method="POST"> 
-                    Nid: <input type="number" name="nid" placeholder="NID" required> </br>
-                    Username: <input type="text" name="uname" placeholder="Username" required> </br>
-                    Date-of_birth: <input type="date" name="dob"> </br>
-                    Street: <input type="text" name="street" placeholder="Street"> </br>
-                    City: <input type="text" name="city" placeholder="City"> </br>
-                    District: <input type="text" name="district" placeholder="District"> </br>
-                    Membership-referal(NID): <input type="number" name="mem" placeholder="123456789"> </br></br>
-                    Phone Number: <input type="number" name="phn" placeholder="01xxxxxxxxx"></br></br>
-                    <label for="userselect">Select Type:</label>
-                    <select id="userselect" name="userselect">
-                        <option value="">-- Select --</option>
-                        <option value="admin">Admin</option>
-                        <option value="landlord">Landlord</option>
-                        <option value="renter">Renter</option>
-                    </select>
-                    <br><br>
-                    <div id="inputcontainer"></div>
-                    <br><br><br>
+<body class="bg-gray-50 min-h-screen font-inter">
+    <div class="flex min-h-screen">
+        <!-- Left Decorative Panel -->
+        <div class="hidden lg:block w-1/2 bg-gradient-to-br from-blue-600 to-indigo-800 relative">
+            <div class="absolute inset-0 flex items-center justify-center p-12">
+                <div class="text-white max-w-md">
+                    <div class="flex items-center mb-6">
+                        <i data-feather="home" class="w-10 h-10 mr-3"></i>
+                        <h1 class="text-3xl font-bold">ResiCare</h1>
+                    </div>
+                    <h2 class="text-2xl font-semibold mb-4">Join Our Community</h2>
+                    <p class="opacity-90">Create your account to access all property management features.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sign Up Panel -->
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
+            <div class="w-full max-w-md">
+                <div class="text-center mb-8 lg:hidden">
+                    <div class="flex items-center justify-center mb-4">
+                        <i data-feather="home" class="w-8 h-8 mr-2 text-blue-600"></i>
+                        <h1 class="text-2xl font-bold text-gray-800">ResiCare</h1>
+                    </div>
+                    <p class="text-gray-600">Create Your Account</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Sign Up</h2>
                     
-                    <input type="submit" value="sign up">
-            </form>
-    </main>
+                    <form action="signup.php" method="POST" class="space-y-4">
+                        <div>
+                            <label for="nid" class="block text-sm font-medium text-gray-700 mb-1">National ID</label>
+                            <input type="number" name="nid" id="nid" required 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                placeholder="Enter your NID">
+                        </div>
+
+                        <div>
+                            <label for="uname" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                            <input type="text" name="uname" id="uname" required 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                placeholder="Choose a username">
+                        </div>
+
+                        <div>
+                            <label for="dob" class="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+                            <input type="date" name="dob" id="dob" 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="street" class="block text-sm font-medium text-gray-700 mb-1">Street</label>
+                                <input type="text" name="street" id="street" 
+                                    class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                    placeholder="Street">
+                            </div>
+                            <div>
+                                <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City</label>
+                                <input type="text" name="city" id="city" 
+                                    class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                    placeholder="City">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="district" class="block text-sm font-medium text-gray-700 mb-1">District</label>
+                            <input type="text" name="district" id="district" 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                placeholder="District">
+                        </div>
+
+                        <div>
+                            <label for="mem" class="block text-sm font-medium text-gray-700 mb-1">Membership Referral (NID)</label>
+                            <input type="number" name="mem" id="mem" 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                placeholder="123456789">
+                        </div>
+
+                        <div>
+                            <label for="phn" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                            <input type="number" name="phn" id="phn" 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                placeholder="01xxxxxxxxx">
+                        </div>
+
+                        <div>
+                            <label for="userselect" class="block text-sm font-medium text-gray-700 mb-1">Select Type</label>
+                            <select id="userselect" name="userselect" 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">-- Select --</option>
+                                <option value="admin">Admin</option>
+                                <option value="landlord">Landlord</option>
+                                <option value="renter">Renter</option>
+                            </select>
+                        </div>
+                        <div id="inputcontainer" class="space-y-4"></div>
+
+                        <div class="pt-4">
+<button type="submit" 
+                                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                Sign Up
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-gray-600">
+                            Already have an account? 
+                            <a href="index.html" class="font-medium text-blue-600 hover:text-blue-500">Sign in</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        feather.replace();
+        
+        document.getElementById('userselect').addEventListener('change', function() {
+            const container = document.getElementById('inputcontainer');
+            container.innerHTML = '';
+            
+            switch(this.value) {
+                case 'admin':
+                    container.innerHTML = `
+                        <div>
+                            <label for="work_email" class="block text-sm font-medium text-gray-700 mb-1">Work Email</label>
+                            <input type="email" name="work_email" id="work_email" 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                placeholder="admin@resicare.com">
+                        </div>
+                        <div>
+                            <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                            <input type="text" name="role" id="role" 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                placeholder="Administrator">
+                        </div>
+                        <div>
+                            <label for="department" class="block text-sm font-medium text-gray-700 mb-1">Department</label>
+                            <input type="text" name="department" id="department" 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                placeholder="Operations">
+                        </div>
+                    `;
+                    break;
+                    
+                case 'landlord':
+                    container.innerHTML = `
+                        <div>
+<label for="total_properties" class="block text-sm font-medium text-gray-700 mb-1">Total Properties</label>
+                            <input type="number" name="total_properties" id="total_properties" min="0" 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                placeholder="0">
+                        </div>
+                    `;
+                    break;
+                    
+                case 'renter':
+                    container.innerHTML = `
+                        <div>
+                            <label for="occupation" class="block text-sm font-medium text-gray-700 mb-1">Occupation</label>
+                            <input type="text" name="occupation" id="occupation" 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                placeholder="Software Engineer">
+                        </div>
+                        <div>
+                            <label for="is_student" class="block text-sm font-medium text-gray-700 mb-1">Student Status</label>
+                            <select name="is_student" id="is_student" 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="rent_status" class="block text-sm font-medium text-gray-700 mb-1">Current Rent Status</label>
+                            <select name="rent_status" id="rent_status" 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="active">Active</option>
+                                <option value="pending">Pending</option>
+                                <option value="past">Past Tenant</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="rental_history" class="block text-sm font-medium text-gray-700 mb-1">Rental History Count</label>
+                            <input type="number" name="rental_history" id="rental_history" min="0" 
+                                class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
+                                placeholder="0">
+                        </div>
+                    `;
+                    break;
+            }
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

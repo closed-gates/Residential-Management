@@ -99,3 +99,28 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Add smooth transitions for interactive elements
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+        button.style.transition = 'all 0.2s ease';
+    });
+
+    // Add subtle hover effects to table rows
+    const tableRows = document.querySelectorAll('tr');
+    tableRows.forEach(row => {
+        row.style.transition = 'background-color 0.2s ease';
+    });
+
+    // Add focus styles to form elements
+    const formElements = document.querySelectorAll('input, select, button');
+    formElements.forEach(el => {
+        el.addEventListener('focus', () => {
+            el.style.boxShadow = '0 0 0 2px rgba(79, 70, 229, 0.5)';
+        });
+        el.addEventListener('blur', () => {
+            el.style.boxShadow = 'none';
+        });
+    });
+});

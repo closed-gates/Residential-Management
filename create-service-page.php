@@ -41,10 +41,10 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
                     <input type="text" name="packages" required>
 
                     <label>Date & Time</label>
-                    <input type="datetime-local" name="service_datetime" required>
+                    <input type="datetime-local" name="datetime" required>
 
                     <label>Service Price</label>
-                    <input type="number" name="price" required>
+                    <input type="number" name="service_price" required>
 
                     <label>Contact Info</label>
                     <input type="text" name="contact_info" required>

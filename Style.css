@@ -20,14 +20,10 @@ body {
 }
 
 .container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
+    display: flex;
+    width: 100%;
 }
 
-.main-content {
-    padding: 2rem 0;
-}
 
 header {
     display: flex;
@@ -164,7 +160,6 @@ tr:hover td {
     --text-dark: #1e293b;
     --sidebar-width: 240px;
 }
-
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -178,12 +173,15 @@ body {
 
 /* Sidebar */
 .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;              /* ⬅️ THIS is the key */
     width: var(--sidebar-width);
     height: 100vh;
     background: #ffffff;
     border-right: 1px solid #e2e8f0;
     padding: 20px;
-    position: fixed;
+    box-sizing: border-box;
 }
 
 .logo {

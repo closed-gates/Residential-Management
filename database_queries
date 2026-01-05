@@ -265,3 +265,15 @@ CREATE TABLE can_occupy (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 ) ;
+
+CREATE TABLE owns (
+    nid BIGINT(20) NOT NULL,
+    pin BIGINT(20) NOT NULL,
+    PRIMARY KEY (nid, pin),
+    CONSTRAINT fk_owns_user
+        FOREIGN KEY (nid) REFERENCES user_info(nid)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_owns_property
+        FOREIGN KEY (pin) REFERENCES flat_plot_rent_selling(pin)
+        ON DELETE CASCADE
+);

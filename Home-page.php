@@ -20,7 +20,7 @@ require_once('auth.php');
             <div class="stats-grid">
                 <div class="card">
                     <h3>Total Residents</h3>
-                    <p class="stat-number">
+                    <p class="stat-number" style="color: #e67e22">
                         <?php
                         require_once('DBconnect.php');
                         $sql = "select count(*) as total_renters from renters where current_rent_status = 1";
@@ -30,7 +30,7 @@ require_once('auth.php');
                         ?>
                     </p>
                 </div>
-                <div class="card">
+                <div class=" card">
                     <h3>Availabe Property</h3>
                     <p class="stat-number" style="color: #e67e22;">
                         <?php

@@ -37,6 +37,15 @@ if (isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && is
             $r = isset($_POST['admin_Role']);
             $dept = $_POST['admin_Department'];
             $e = isset($_POST['admin_Email']);
+            $sql = "select * from admin where  work_email = $e";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) != 0) {
+                $sql = "delete from user_info where nid = $n";
+                $result = mysqli_query($conn, $sql);
+                header("Location: Signup-page.html?error=exists");
+                exit();
+
+            }
             $sql = "insert into admin values('$n','$r','$dept','$u','$e')";
             mysqli_query($conn, $sql);
         } else if ($us == 'landlord') {
@@ -48,25 +57,21 @@ if (isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && is
             }
             $sql = "insert into landlord values('$n','$l','0')";
             mysqli_query($conn, $sql);
-        } elseif ($us == 'landlord') {
+        } elseif ($us == 'renter') {
             $o = $_POST['renter_Occupation'];
             $is = $_POST['renter_is_student'] ? 1 : 0;
             $crs = $_POST['renter_current_rent_status'] ? 1 : 0;
             $rhc = $_POST['renter_Rental_History'];
             $sql = "insert into renters values('$n','$o','$is','$crs','$rhc')";
             mysqli_query($conn, $sql);
-        } else {
-            $sql = "delete from user_info where nid = $n";
-            mysqli_query($conn, $sql);
-            header("Location: Signup-page.html?error=exists");
-            exit();
         }
-        $_SESSION['user_type'] = $us;
-        session_regenerate_id(true);
-        header("Location: Home-page.php");
-
     }
+    $_SESSION['user_type'] = $us;
+    session_regenerate_id(true);
+    header("Location: Home-page.php");
+
 }
+
 
 
 

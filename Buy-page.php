@@ -120,7 +120,11 @@ if ($can_proceed && $message === '') {
                 </div>
                 <div class="card">
                     <h3>Furnishing</h3>
-                    <p class="stat-number" style="color: #e67e22;"><?php echo $row['is_furnished']; ?></p>
+                    <p class="stat-number" style="color: #e67e22;"><?php if ($row['is_furnished'] == 1) {
+                        echo "Furnished";
+                    } else {
+                        echo "Not furnished";
+                    } ?></p>
                 </div>
                 <div class="card">
                     <h3>Price</h3>

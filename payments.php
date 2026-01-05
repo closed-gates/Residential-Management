@@ -160,7 +160,7 @@ if (!empty($in)) {
     mysqli_stmt_close($stmt);
 
     if ($groceries) {
-        $price = ($groceries['price'] - ($groceries['price'] * $groceries['deal']) + ($groceries['price'] * ($tax / 100)));
+        $price = ($groceries['price'] - ($groceries['price'] * $groceries['deals']) + ($groceries['price'] * ($tax / 100)));
         $desc = $_SESSION['username'] . " bought groceries " . $groceries['inventory_list'] . " Transaction_id: $tr Price: $price Paid Through: $pay";
         insertPayment($conn, $tr, $n, $price, 0, $in, $desc);
     }

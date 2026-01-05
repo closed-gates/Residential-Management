@@ -126,6 +126,7 @@ CREATE TABLE review (
     nid BIGINT NOT NULL,
     token_id BIGINT NOT NULL,
     review_id BIGINT NOT NULL PRIMARY Key,
+    pin BIGINT Not NULL,
 
     UNIQUE(review_id),
 
@@ -136,6 +137,10 @@ CREATE TABLE review (
 
     FOREIGN KEY (token_id)
         REFERENCES complaint_suggestion(token_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (pin)
+        REFERENCES flat_plot_rent_selling(pin)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );

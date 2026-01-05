@@ -43,9 +43,9 @@ if (!empty($bn) && $bn != 0) {
     mysqli_stmt_close($stmt);
 
     if ($service) {
-        $price = $service['service_price'] * ($tax / 100);
+        $price = $property['service_price'] + $property['service_price'] * ($tax / 100);
         $desc = $_SESSION['username'] . " requested maintenance service from business " . $bn . " Transaction_id: $tr Price: " . $price . " Paid Through: $pay";
-        insertPayment($conn, $tr, $n, 0, $bn, 0, $desc);
+        insertPayment($conn, $tr, $n, $price, $bn, 0, $desc);
     }
 
     header("Location: Service-page.php");
@@ -63,7 +63,7 @@ if (!empty($p) && $p != 0) {
     mysqli_stmt_close($stmt);
 
     if ($property) {
-        $price = $property['price_rent'] * ($tax / 100);
+        $price = $property['price_rent'] + $property['price_rent'] * ($tax / 100);
         $type = $property['renting_type'] ?? '';
 
         if ($type === "Rent" || $type === "Sub-let") {
@@ -160,9 +160,9 @@ if (!empty($in)) {
     mysqli_stmt_close($stmt);
 
     if ($groceries) {
-        $price = $groceries['price'] * ($tax / 100);
+        $price = ($groceries['price'] - ($groceries['price'] * $groceries['deal']) + ($groceries['price'] * ($tax / 100)));
         $desc = $_SESSION['username'] . " bought groceries " . $groceries['inventory_list'] . " Transaction_id: $tr Price: $price Paid Through: $pay";
-        insertPayment($conn, $tr, $n, 0, 0, $in, $desc);
+        insertPayment($conn, $tr, $n, $price, 0, $in, $desc);
     }
 
     header("Location: grocery-page.php");

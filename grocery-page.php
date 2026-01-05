@@ -49,7 +49,7 @@ require_once('auth.php');
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo "<tr>
                                     <td>{$row['invoice_no']}</td>
-                                    <td>{$row['deals']}</td>
+                                    <td>{$row['deals']}%</td>
                                     <td>{$row['inventory_list']}</td>
                                     <td>{$row['price']}</td>
                                     <td>{$row['contact_info']}</td>

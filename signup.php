@@ -34,9 +34,9 @@ if (isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && is
         $_SESSION['user_id'] = $n;
         $_SESSION['username'] = $u;
         if ($us == 'admin') {
-            $r = isset($_POST['admin_Role']);
+            $r = $_POST['admin_Role'];
             $dept = $_POST['admin_Department'];
-            $e = isset($_POST['admin_Email']);
+            $e = $_POST['admin_Email'];
             $sql = "insert into admin values('$n','$r','$dept','$u','$e')";
             mysqli_query($conn, $sql);
         } else if ($us == 'landlord') {

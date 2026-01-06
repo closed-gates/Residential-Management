@@ -12,7 +12,7 @@ require_once('auth.php')
             <h1>Change</h1>
         </header>
         <form action="change.php" class="form_design" method="POST">
-            NID: <input type="number" name="pin" placeholder="nid" required> </br>
+            NID: <input type="number" name="pin" placeholder="nid" required> </br></br>
             Name: <input type="text" name="uname" required></br>
             Date of Birth: <input type="text" name="dob"> </br>
             Street: <input type="text" name="street"> </br>

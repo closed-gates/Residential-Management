@@ -16,7 +16,7 @@ if (isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && is
     if (!in_array($us, $allowedTypes, true)) {
         die("Invalid user type selected");
     }
-    $sql = "select * from user_info where nid = '$n'";
+    $sql = "select * from user_info where nid = '$n' and name = '$u'";
 
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) != 0) {
@@ -59,7 +59,7 @@ if (isset($_POST['uname']) && isset($_POST["nid"]) && isset($_POST['dob']) && is
         $_SESSION['user_type'] = $us;
         session_regenerate_id(true);
         header("Location: Home-page.php");
-
+        exit();
     }
 }
 

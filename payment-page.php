@@ -43,7 +43,7 @@ $pay = $_POST['pay'] ?? 'unknown';
                     $sql = "Select * from online_groceries where invoice_no = $in";
                     $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_assoc($result);
-                    $price = ($row['price'] - ($row['price'] * $row['deal']) + ($row['price'] * ($tax / 100)));
+                    $price = ($row['price'] - ($row['price'] * $row['deals']) + ($row['price'] * ($tax / 100)));
                 }
                 echo "Amount to pay: " . $price . " Tk";
                 ?>

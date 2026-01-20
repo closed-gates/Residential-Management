@@ -1,0 +1,7 @@
+1.Change the issets 
+2.add edit pages for admin and lanlord(based on address)
+3.make the sign in proccess more secure
+4.basic security
+5.get rid of unnessecery details (make them have somthing to do like phone number)
+6.Make the ui better
+7.fix bugs(already existing)

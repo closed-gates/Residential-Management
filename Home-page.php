@@ -48,9 +48,9 @@ require_once('auth.php');
             <section class="table-section">
                 <h2>List of property</h2>
                 <?php
+                echo '<div style="display:flex; justify-content:flex-end;">';
                 if (in_array($_SESSION['user_type'], ['admin', 'landlord'])) {
                     echo '
-                    <div style="display:flex; justify-content:flex-end;">
                         <form action="add-property.php" class="form_design" method="POST">
                             <button type="submit" class="btn-primary">+Add property</button>
                         </form>
@@ -106,23 +106,31 @@ require_once('auth.php');
                                             $label = 'Rent';
                                         elseif ($propertyType === 'Sub-let')
                                             $label = 'Sub-let';
+                                        echo '<div style="display: flex; gap: 20px;">';
                                         if ($allowed) {
                                             echo '<form action="Buy-page.php" method="POST">
                                     <input type="hidden" name="PIN" value="' . $row[0] . '">
                                     <input type="hidden" name="nid" value="' . $_SESSION['user_id'] . '">
-                                    <button class="btn-primary">' . $label . '</button>
-                                </form>';
+                                    <button class="btn-primary">' . $label . '</button></form>';
                                         } else {
-                                            echo '<button class="btn-primary" disabled style="opacity:0.5; cursor:not-allowed;">
+                                            echo '><button class="btn-primary" disabled style="opacity:0.5; cursor:not-allowed;">
                                         Not Allowed
                                     </button>';
                                         }
-                                        ?>
+                                        if ($allowed && $user === 'admin') {
+                                            echo '<form action="spec-edit-property-page.php" method="POST">
+                                    <input type="hidden" name="PIN" value="' . $row[0] . '">
+                                    <input type="hidden" name="nid" value="' . $_SESSION['user_id'] . '">
+                                    <button class="btn-primary">' . "Edit" . '</button></form>';
+                                        }
+                                        echo '</div>';
+                            }
+                            ?>
 
-                                    </td>
-                                </tr>
-                            <?php }
-                        }
+                                </td>
+                            </tr>
+                        <?php }
+
                         ?>
                     </thead>
                 </table>

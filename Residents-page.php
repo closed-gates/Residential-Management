@@ -3,7 +3,9 @@
 <?php
 require_once('auth.php')
     ?>
+<head>
 <?php include 'head.php'; ?>
+</head>
 
 <body>
     <div class="container">
@@ -29,28 +31,28 @@ require_once('auth.php')
                             while ($row = mysqli_fetch_array($result)) {
 
                                 ?>
-                                <tr>
-                                    <td><?php
-                                    $sql1 = "select * from renters r join user_info u on u.nid = r.nid where u.nid = $row[0]";
-                                    $result1 = mysqli_query($conn, $sql1);
-                                    $row1 = mysqli_fetch_array($result1);
-                                    echo $row1[6]; ?></td>
-                                    <td><?php echo $row[1]; ?></td>
-                                    <td><?php if ($row[2] == 1) {
-                                        echo "Student";
-                                    } else {
-                                        echo "Not A Student";
-                                    }
-                                    ?></td>
-                                    <td><?php if ($row[3] == 1) {
-                                        echo "Currently Renting";
-                                    } else {
-                                        echo "Not Currently Renting";
-                                    }
-                                    ?></td>
-                                    <td><?php echo $row[4]; ?></td>
-                                </tr>
-                            <?php }
+                                        <tr>
+                                            <td><?php
+                                            $sql1 = "select * from renters r join user_info u on u.nid = r.nid where u.nid = $row[0]";
+                                            $result1 = mysqli_query($conn, $sql1);
+                                            $row1 = mysqli_fetch_array($result1);
+                                            echo $row1[6]; ?></td>
+                                            <td><?php echo $row[1]; ?></td>
+                                            <td><?php if ($row[2] == 1) {
+                                                echo "Student";
+                                            } else {
+                                                echo "Not A Student";
+                                            }
+                                            ?></td>
+                                            <td><?php if ($row[3] == 1) {
+                                                echo "Currently Renting";
+                                            } else {
+                                                echo "Not Currently Renting";
+                                            }
+                                            ?></td>
+                                            <td><?php echo $row[4]; ?></td>
+                                        </tr>
+                                <?php }
                         }
                         ?>
                     </thead>

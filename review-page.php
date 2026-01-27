@@ -3,7 +3,9 @@
 <?php
 require_once('auth.php')
     ?>
+<head>
 <?php include 'head.php'; ?>
+</head>
 
 <body>
     <div class="container">

@@ -9,7 +9,10 @@ if (!isset($_POST['business_no'])) {
 
 $_SESSION['business_no'] = $_POST['business_no'];
 ?>
-<?php include 'head.php'; ?>
+
+<head>
+    <?php include 'head.php'; ?>
+</head>
 
 <body>
     <div class="container">

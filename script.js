@@ -59,18 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 container.appendChild(document.createElement("br"));
                 container.appendChild(document.createElement("br"));
             }
-            else if(label == "Current Rent Status"){
-                const l = document.createElement("label");
-                l.textContent = `Currently Renting`;
-                container.appendChild(l);
-                input.type = "checkbox";
-                input.placeholder = label;
-                const safeName = label.replace(/\s+/g, '_').toLowerCase();
-                input.name = `${this.value}_${safeName}`;
-                container.appendChild(input);
-                container.appendChild(document.createElement("br"));
-                container.appendChild(document.createElement("br"));
-            }
             else if(label == "Rental_History"){
                 input.type = "number";
                 const l = document.createElement("label");

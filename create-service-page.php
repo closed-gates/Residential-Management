@@ -9,7 +9,10 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include 'head.php'; ?>
+
+<head>
+    <?php include 'head.php'; ?>
+</head>
 
 <body>
 

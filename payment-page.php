@@ -12,7 +12,10 @@ $in = $_POST['in'] ?? 0;      // groceries
 $pay = $_POST['pay'] ?? 'unknown';
 
 ?>
-<?php include 'head.php'; ?>
+
+<head>
+    <?php include 'head.php'; ?>
+</head>
 
 <body>
     <div class="container">

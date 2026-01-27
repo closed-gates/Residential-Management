@@ -98,11 +98,17 @@ if ($row['renting_type'] === 'Sale') {
 if ($can_proceed && $message === '') {
     $message = $label;
 }
+$sql1 = "select u.name from user_info u join owns o where o.nid = u.nid and o.pin = '$pin'";
+$row1 = mysqli_fetch_assoc(mysqli_query($conn, $sql1));
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include 'head.php'; ?>
+
+<head>
+    <?php include 'head.php'; ?>
+</head>
 
 <body>
     <div class="container">
@@ -111,12 +117,18 @@ if ($can_proceed && $message === '') {
         <main class="main-content">
             <div class="stats-grid">
                 <div class="card">
+                    <h3>Owned BY</h3>
+                    <p class="stat-number" style="color: #e67e22;"><?php echo $row1['name']; ?></p>
+                </div>
+                <div class="card">
                     <h3>PIN</h3>
                     <p class="stat-number" style="color: #e67e22;"><?php echo $row['pin']; ?></p>
                 </div>
                 <div class="card">
                     <h3>Utilities</h3>
-                    <p class="stat-number" style="color: #e67e22;"><?php echo $row['utilities']; ?></p>
+                    <p class="stat-number" style="color: #e67e22; overflow-wrap: break-word; word-break: break-word;">
+                        <?php echo $row['utilities']; ?>
+                    </p>
                 </div>
                 <div class="card">
                     <h3>Furnishing</h3>

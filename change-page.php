@@ -3,7 +3,10 @@
 <?php
 require_once('auth.php')
     ?>
-<?php include 'head.php'; ?>
+
+<head>
+    <?php include 'head.php'; ?>
+</head>
 
 <body>
     <?php include 'head-nav.php' ?>

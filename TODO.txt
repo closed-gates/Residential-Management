@@ -1,13 +1,15 @@
-.Change the issets 
+.edit capabilities for everyone (admin able to edit everything others only their own things)
+account change: admin done , landlord done , renters done
+services: admin
+reviews: admin  , landlord  , renters
+groceries: admin
+property: admin done , landlord    ; .property edit page change access for landlord and admin (renters cannot edit property)
+Payment: admin
 
-. let admins edit everything
-. admin Changes history (payment tab)
-. add edit pages for admin and lanlord(based on address)
-    . edit services
-    . edit groceries
-    . edit other accounts
-    . admin can change landlord properties
+. either buy page or home page user access has to be changed
+. review page change access for landlord and admin (only renters and landlords can review)
 . Add delete capabilities
+. admin Changes history (payment tab)
 . make the sign in proccess more secure
 . basic security
 . get rid of unnessecery details (make them have somthing to do like phone number)

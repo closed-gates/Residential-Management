@@ -44,7 +44,7 @@ if (!empty($bn) && $bn != 0) {
 
     if ($service) {
         $price = $property['service_price'] + $property['service_price'] * ($tax / 100);
-        $desc = $_SESSION['username'] . " requested maintenance service from business " . $bn . " Transaction_id: $tr Price: " . $price . " Paid Through: $pay";
+        $desc = $_SESSION['username'] . " requested maintenance service from business " . $bn . " Price: " . $price . " Paid Through: $pay";
         insertPayment($conn, $tr, $n, $price, $bn, 0, $desc);
     }
 
@@ -89,7 +89,7 @@ if (!empty($p) && $p != 0) {
             } elseif ($num_occupants >= 4) {
                 die("Flat is full. Cannot rent.");
             } else {
-                $desc = $_SESSION['username'] . " rented the flat $p Transaction_id: $tr Price: $price Paid Through: $pay";
+                $desc = $_SESSION['username'] . " rented the flat $p Price: $price Paid Through: $pay";
                 insertPayment($conn, $tr, $n, $p, 0, 0, $desc);
 
                 $sql_update = "UPDATE renters SET current_rent_status = 1 WHERE nid = ?";
@@ -133,7 +133,7 @@ if (!empty($p) && $p != 0) {
             } elseif ($other_owner) {
                 die("Flat is already sold to another user.");
             } else {
-                $desc = $_SESSION['username'] . " bought the flat $p Transaction_id: $tr Price: $price Paid Through: $pay";
+                $desc = $_SESSION['username'] . " bought the flat $p Price: $price Paid Through: $pay";
                 insertPayment($conn, $tr, $n, $p, 0, 0, $desc);
 
                 $sql_own = "INSERT INTO owns (nid, pin) VALUES (?, ?)";
@@ -161,7 +161,7 @@ if (!empty($in)) {
 
     if ($groceries) {
         $price = ($groceries['price'] - ($groceries['price'] * $groceries['deals']) + ($groceries['price'] * ($tax / 100)));
-        $desc = $_SESSION['username'] . " bought groceries " . $groceries['inventory_list'] . " Transaction_id: $tr Price: $price Paid Through: $pay";
+        $desc = $_SESSION['username'] . " bought groceries " . $groceries['inventory_list'] . " Price: $price Paid Through: $pay";
         insertPayment($conn, $tr, $n, $price, 0, $in, $desc);
     }
 

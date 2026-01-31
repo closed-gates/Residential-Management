@@ -44,20 +44,7 @@ if ($row['renting_type'] === 'Sale') {
     }
     mysqli_stmt_close($stmt);
 
-    // Check if someone else owns it
-    $sql = "SELECT * FROM owns WHERE pin = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $pin);
-    mysqli_stmt_execute($stmt);
-    $res = mysqli_stmt_get_result($stmt);
-    if (mysqli_num_rows($res) > 0) {
-        $row_owned = mysqli_fetch_assoc($res);
-        if ($row_owned['nid'] != $user_id) {
-            $can_proceed = false;
-            $message = "Flat already sold";
-        }
-    }
-    mysqli_stmt_close($stmt);
+
 
 } elseif ($row['renting_type'] === 'Rent' || $row['renting_type'] === 'Sub-let') {
     $label = $row['renting_type'];

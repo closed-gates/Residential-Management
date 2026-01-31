@@ -40,12 +40,12 @@ require_once('auth.php'); // ensures user is logged in
                             </thead>
                             <tbody>';
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<tr>
+                        echo "<tr stlye= 'overflow-wrap: break-word; word-break: break-word;'>
                                 <td>{$row['transaction_id']}</td>
                                 <td>" . ($row['pin'] ?: '-') . "</td>
                                 <td>" . ($row['business_phn_no'] ?: '-') . "</td>
                                 <td>" . ($row['invoice'] ?: '-') . "</td>
-                                <td>{$row['receipt']}</td>
+                                <td style=' max-width: 300px; white-space: normal; overflow-wrap: anywhere; word-break: break-word; '>{$row['receipt']}</td>
                               </tr>";
                     }
                     echo '</tbody></table>';

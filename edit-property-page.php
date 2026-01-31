@@ -26,7 +26,6 @@ $_SESSION['pin'] = $_POST['PIN'];
                 <option value="Rent">Rent</option>
                 <option value="Sub-Let">Sub-Let</option>
             </select><br><br>
-            <input type="hidden" name="PIN" value="<?php $_SESSION["pin"] ?>">
             <input type="hidden" name="nid" value="<?php $_SESSION['user_id'] ?>">
             <input type="submit" value="Confirm">
         </form>

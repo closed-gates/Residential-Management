@@ -116,12 +116,12 @@ require_once('auth.php');
                                     <input type="hidden" name="nid" value="' . $_SESSION['user_id'] . '">
                                     <button class="btn-primary">' . $label . '</button></form>';
                                         } else {
-                                            echo '><button class="btn-primary" disabled style="opacity:0.5; cursor:not-allowed;">
+                                            echo '<button class="btn-primary" disabled style="opacity:0.5; cursor:not-allowed;">
                                         Not Allowed
                                     </button>';
                                         }
                                         if ($allowed && $user === 'admin') {
-                                            echo '<form action="spec-edit-property-page.php" method="POST">
+                                            echo '<form action="edit-property-page.php" method="POST">
                                     <input type="hidden" name="PIN" value="' . $row[0] . '">
                                     <input type="hidden" name="nid" value="' . $_SESSION['user_id'] . '">
                                     <button class="btn-primary">' . "Edit" . '</button></form>';

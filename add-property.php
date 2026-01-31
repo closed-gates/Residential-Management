@@ -22,7 +22,7 @@ require_once('auth.php')
             PIN: <input type="number" name="pin" placeholder="PIN" required> </br>
             Utilities: <input type="text" name="util" placeholder="Wi-fi,Fridge etc..."></br>
             Furnished: <input type="checkbox" name="is_furnished"> </br>
-            Price/Rent: <input type="number" name="price" placeholder="0000" required> </br></br>
+            Price/Rent: <input type="number" step="0.01" name="price" placeholder="0000" required> </br></br>
             <label for="flat_type">Select Renting Type:</label>
             <select id="flat_type" name="flat_type" required>
                 <option value="">-- Select --</option>

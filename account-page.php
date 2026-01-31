@@ -6,16 +6,23 @@ require_once("Dbconnect.php");
 $sql = "select * from user_info where nid = " . $_SESSION['user_id'] . "";
 $row = mysqli_fetch_array(mysqli_query($conn, $sql));
 ?>
-<?php include 'head.php'; ?>
+
+<head>
+    <?php include 'head.php'; ?>
+</head>
 
 <body>
     <div class="container">
         <?php include 'head-nav.php'; ?>
         <main class="main-content">
-            <div style="display:flex; justify-content:flex-end;">
+            <div style="display:flex; justify-content:flex-end; gap:12px;">
                 <form action="change-page.php" class="form_design" method="POST">
                     <button type="submit" class="btn-primary">Change Account Details</button>
                 </form>
+                <?php if ($_SESSION["user_type"] == "admin") {
+                    echo "<form action='change-other-page.php' class='form_design' method='POST'><button type='submit' class='btn-primary'>Change Others Account Details</button></form>";
+                }
+                ?>
             </div>
             <div class="card">
                 <h3>NID</h3>

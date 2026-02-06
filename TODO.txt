@@ -1,11 +1,12 @@
 .edit capabilities for everyone (admin able to edit everything others only their own things)
-account change: admin done , landlord done , renters done
 services: admin
 reviews: admin  , landlord  , renters
 groceries: admin
 property: admin done , landlord    ; .property edit page change access for landlord and admin (renters cannot edit property)
-Payment: admin
+Payment: admin , also change receipts from every connection to payment
 
+
+. Change Packages of services
 . either buy page or home page user access has to be changed
 . review page change access for landlord and admin (only renters and landlords can review)
 . Add delete capabilities

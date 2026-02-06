@@ -1,5 +1,4 @@
 .edit capabilities for everyone (admin able to edit everything others only their own things)
-services: admin
 reviews: admin  , landlord  , renters
 groceries: admin
 property: admin done , landlord    ; .property edit page change access for landlord and admin (renters cannot edit property)

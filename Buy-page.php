@@ -41,6 +41,9 @@ if ($row['renting_type'] === 'Sale') {
     if (mysqli_num_rows($res) > 0) {
         $can_proceed = false;
         $message = "You already own this flat";
+    } else if ($_SESSION['user_type'] == "renter") {
+        $can_proceed = false;
+        $message = "You cannot buy flats";
     }
     mysqli_stmt_close($stmt);
 
@@ -75,6 +78,10 @@ if ($row['renting_type'] === 'Sale') {
         $message = "You have already rented this flat";
     }
     mysqli_stmt_close($stmt);
+    if ($_SESSION['user_type'] == "landlord") {
+        $can_proceed = false;
+        $message = "You cannot rent/sub-let flats";
+    }
 
 } else {
     $label = 'N/A';
@@ -158,8 +165,10 @@ $row1 = mysqli_fetch_assoc(mysqli_query($conn, $sql1));
                 $sql = "
                     SELECT 
                         u.name,
+                        r.review_id,
                         cs.suggestion,
                         cs.complain,
+                        cs.token_id,
                         cs.feedback
                     FROM review r
                     JOIN complaint_suggestion cs 
@@ -184,10 +193,19 @@ $row1 = mysqli_fetch_assoc(mysqli_query($conn, $sql1));
                                 <p><strong>Suggestion:</strong> ' . htmlspecialchars($review['suggestion']) . '</p>
                                 <p><strong>Complaint:</strong> ' . htmlspecialchars($review['complain']) . '</p>
                                 <p><strong>Feedback:</strong> ' . htmlspecialchars($review['feedback']) . '</p>
-                            </div>
-                        ';
+                                <p><strong>Review ID:</strong> ' . htmlspecialchars($review['review_id']) . '</p>';
+                        $sql1 = "select * from review where nid = '" . $_SESSION['user_id'] . "' and pin = '" . $_SESSION['pin'] . "'";
+                        $row2 = (mysqli_query($conn, $sql1));
+                        if ($_SESSION['user_type'] == 'admin' || (mysqli_num_rows($row2) > 0 && $review['name'] == $_SESSION["username"])) {
+                            echo '<br><br><form action="edit-review-page.php" method="POST">
+                                    <input type="hidden" name="t_id" value="' . $review['token_id'] . '">
+                                    <button class="btn-primary">' . "Edit" . '</button></form>';
+
+                        }
+                        echo '</div>';
                     }
                 }
+
 
                 mysqli_stmt_close($stmt);
                 ?>

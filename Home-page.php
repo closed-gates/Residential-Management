@@ -94,15 +94,8 @@ require_once('auth.php');
                                         <?php
                                         $user = $_SESSION['user_type'];
                                         $propertyType = $row[4];
-                                        $allowed = false;
+
                                         $label = "";
-                                        if ($user === 'admin') {
-                                            $allowed = true;
-                                        } elseif ($user === 'landlord' && $propertyType === 'Sale') {
-                                            $allowed = true;
-                                        } elseif ($user === 'renter' && in_array($propertyType, ['Rent', 'Sub-let'])) {
-                                            $allowed = true;
-                                        }
                                         if ($propertyType === 'Sale')
                                             $label = 'Buy';
                                         elseif ($propertyType === 'Rent')
@@ -110,17 +103,14 @@ require_once('auth.php');
                                         elseif ($propertyType === 'Sub-let')
                                             $label = 'Sub-let';
                                         echo '<div style="display: flex; gap: 20px;">';
-                                        if ($allowed) {
-                                            echo '<form action="Buy-page.php" method="POST">
+
+                                        echo '<form action="Buy-page.php" method="POST">
                                     <input type="hidden" name="PIN" value="' . $row[0] . '">
                                     <input type="hidden" name="nid" value="' . $_SESSION['user_id'] . '">
                                     <button class="btn-primary">' . $label . '</button></form>';
-                                        } else {
-                                            echo '<button class="btn-primary" disabled style="opacity:0.5; cursor:not-allowed;">
-                                        Not Allowed
-                                    </button>';
-                                        }
-                                        if ($allowed && $user === 'admin') {
+                                        $sql3 = "select nid from owns where pin = '" . $row[0] . "' and nid = '" . $_SESSION['user_id'] . "'";
+                                        $result2 = mysqli_query($conn, $sql3);
+                                        if ($user === 'admin' || mysqli_num_rows($result2) > 0) {
                                             echo '<form action="edit-property-page.php" method="POST">
                                     <input type="hidden" name="PIN" value="' . $row[0] . '">
                                     <input type="hidden" name="nid" value="' . $_SESSION['user_id'] . '">

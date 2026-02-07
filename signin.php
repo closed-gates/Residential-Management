@@ -7,7 +7,7 @@ $u = $_POST['fname'];
 $n = $_POST['nid'];
 
 // 1️⃣ Verify user exists
-$sql = "SELECT * FROM user_info WHERE nid='$n'";
+$sql = "select * FROM user_info WHERE nid='$n' and name = '$u'";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) === 0) {

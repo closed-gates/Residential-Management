@@ -16,7 +16,7 @@ $us = $_POST['userselect'] ?? '';
 if (!in_array($us, $allowedTypes, true)) {
     die("Invalid user type selected");
 }
-$sql = "select * from user_info where nid = '$n'";
+$sql = "select * from user_info where nid = '$n' or name = '$u'";
 
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) != 0) {

@@ -1,8 +1,10 @@
 .edit capabilities for everyone (admin able to edit everything others only their own things)
-reviews: admin  , landlord  , renters
+reviews: Done
+property: admin done , landlord done   ; .property edit page change access for landlord and admin (renters cannot edit property) done
+
 groceries: admin
-property: admin done , landlord    ; .property edit page change access for landlord and admin (renters cannot edit property)
 Payment: admin , also change receipts from every connection to payment
+Admin can buy or rent or sublet for others
 
 
 . Change Packages of services

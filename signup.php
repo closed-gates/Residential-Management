@@ -24,10 +24,11 @@ if (mysqli_num_rows($result) != 0) {
     exit();
 
 } else {
-    if ($m != 'NO') {
+    if ($m != '') {
         $sql = "insert into user_info values('$n','$u','$dob','$s','$c','$d','YES','$m')";
     } else {
-        $sql = "insert into user_info(nid,name,dob,street,city,district,membership) values('$n','$u','$dob','$s','$c','$d','$m')";
+        $sql = "insert into user_info(nid,name,dob,street,city,district,membership) values('$n','$u','$dob','$s','$c','$d','NO')";
+
     }
     mysqli_query($conn, $sql);
     if ($us == 'admin') {
